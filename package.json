@@ -24,7 +24,7 @@
   },
   "contributors": [],
   "scripts": {
-    "dev": "nodemon",
+    "dev": "",
     "test": "mocha",
     "start": "node index.js"
   },
