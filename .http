@@ -1,0 +1,42 @@
+POST http://localhost:3009/api/phonebill/
+content-type: application/json
+
+{
+    "price_plan": "sms 501",
+    "actions" : "call, sms, call,call,sms"
+}
+
+
+###
+POST http://localhost:3009/api/price_plan/update
+content-type: application/json
+
+{
+    "plan_name": "2.65",
+    "sms_price":"14.34",
+    "call_price":"11.2"
+}
+
+
+###
+POST http://localhost:3009/api/price_plan/create
+content-type: application/json
+
+{
+    "name": "sms_kick_200",
+    "call_cost" : 2.65,
+    "sms_cost": 0.45
+}
+
+
+###
+POST http://localhost:3009/api/price_plan/delete
+content-type: application/json
+
+{
+    "plan_name": "6"
+}
+
+
+###
+GET http://localhost:3009/api/price_plans
