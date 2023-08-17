@@ -39,28 +39,28 @@
             <section>
                 <div class="row" style="text-align: center;">
                     <!-- Adding a price plan starts here -->
-                    <div class="col l4 m12 col s12" style="background-color: aquamarine;">
+                    <div class="col l6 m12 col s12" style="background-color: aquamarine;">
                         <p x-text="titlePhoneBillsqladd"></p>
-                        <form class="col s12">
+                        <form class="col s12" x-on:submit.prevent="plan_name, call_price, sms_price">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="name">Enter Plan Name:</label>
-                                    <input id="name" type="text" length="101">
+                                    <input type="text" id="name" name="name" x-model="plan_name">
                                 </div>
 
                                 <div class="input-field col s12">
 
                                     <label for="name">Enter Call Price:</label>
-                                    <input id="name" type="text" length="101">
+                                    <input id="name" type="number" length="101" x-model="call_price">
                                 </div>
 
                                 <div class="input-field col s12">
                                     <label for="name">Enter Sms Price:</label>
-                                    <input id="name" type="text" length="101">
+                                    <input id="name" type="number" length="101" x-model="sms_price">
                                 </div>
                             </div>
 
-                            <button x-on:click="addPricePlan" class="waves-effect waves-light btn-small">Add
+                            <button x-on:click="createPlan()" class="waves-effect waves-light btn-small">Add
                                 plan</button>
 
                         </form>
@@ -69,24 +69,24 @@
                     <!-- adding a price plan ends here -->
                     <!-- updating a an exisiting price plan starts here -->
 
-                    <div class="col l4 m12 s12" style="background-color: blanchedalmond;">
+                    <div class="col l6 m12 s12" style="background-color: blanchedalmond;">
                         <p x-text="titlePhoneBillsqlupdate"></p>
                         <form class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="name">Enter Plan Name:</label>
-                                    <input x-model="name" type="text" id="name" name="name" required>
+                                    <input x-model="name" type="text" id="name" name="name">
                                 </div>
 
                                 <div class="input-field col s12">
 
                                     <label for="callprice">Enter Call Price:</label>
-                                    <input x-model="call_price" type="number" id="callprice" name="call price" required>
+                                    <input x-model="call_price" type="number" id="callprice" name="call price">
                                 </div>
 
                                 <div class="input-field col s12">
                                     <label for="smsprice">Enter Sms Price:</label>
-                                    <input x-model="sms_price" type="number" id="smsprice" name="sms price" required>
+                                    <input x-model="sms_price" type="number" id="smsprice" name="sms price" >
                                 </div>
                             </div>
 
@@ -97,65 +97,51 @@
 
                     </div>
                     <!-- updating an exisiting price plan ends here -->
-                    <!-- deleting an exisiting price plan starts here -->
-                    <div class="col l4 m12 s12" style="background-color: aqua;">
-                        <p x-text="titlePhoneBillsqldelete"></p><br><br>
-
-                        <form class="col s12">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <label for="name">Enter Plan Name:</label>
-                                    <input id="name" type="text" length="101">
-                                </div>
-                            </div>
-                            <br><br>
-
-                            <p>Deleting this Plan will be removed from the Databse</p>
-
-                            <button x-on:click="addPricePlan" class="waves-effect waves-light btn-small">delete
-                                plan</button>
-
-                        </form>
-
-                    </div>
-                    <!-- deleting an exisiting price plan ends here -->
+                    
                 </div>
             </section><br>
-            <section> 
-                <div class="row" >
-                     <!-- Available price plan starts here -->
-            <div class="col l12 m12 s12">
+            <section>
+             
+                <div class="row">
+                    <!-- Available price plan starts here -->
+                   
+                    <div class="col l12 m12 s12" style="text-align: center; background-color: aqua;">
                         <p x-text="titlePhoneBillsqlavailable" style="text-align: center;"></p>
-                        <div class="col l12 m12 s12" style="text-align: center;">
-                            <table class="bordered">
-                                <thead style="text-align: center;">
-                                  <tr>
-                                    <th colspan="3">ID</th>
-                                      <th colspan="3">PLAN NAME</th>
-                                      <th colspan="3">SMS PRICE</th>
-                                      <th colspan="3">CALL PRICE</th>
-                                      <th colspan="3">TOTAL</th>
-                                  </tr>
-                                </thead>
+                        
+                        <table class="bordered" >
+                            <thead style="text-align: center;">
+                                <tr>
+                                    <!-- <th colspan="3">ID</th> -->
+                                    <th colspan="3">PLAN NAME</th>
+                                    <th colspan="3">SMS PRICE</th>
+                                    <th colspan="3">CALL PRICE</th>
+                                    <th colspan="3">TOTAL</th>
+                                    <th colspan="3">ACTION</th>
+                                </tr>
+                            </thead>
+                            <template x-for="i in response">
                                 <tbody style="text-align: center;">
-                                  <tr>
-                                    <td colspan="3">John Smith</td>
-                                    <td colspan="3">7894xxxx45</td>
-                                    <td colspan="3">johnsmith@gmail.com</td>
-                                    <td colspan="3">johnsmith@gmail.com</td>
-                                    <td colspan="3">johnsmith@gmail.com</td>
-                                  </tr>
-                             </tbody>
-                             </table>
-                           </div>
-                        </div>
-            <!-- Available price plan ends here -->
+                                    <tr>
+                                        <!-- <td colspan="3" x-text="i.id"></td> -->
+                                        <td colspan="3"x-text="i.plan_name"></td>
+                                        <td colspan="3" x-text="i.sms_price"></td>
+                                        <td colspan="3"x-text="i.call_price"></td>
+                                        <td colspan="3" x-text="i.total">johnsmim</td>
+                                        <td colspan="3"> <button x-on:click="deletePlan(i.plan_name)"
+                                                class="waves-effect waves-light btn-small">delete
+                                                plan</button></td>
+                                    </tr>
+                                </tbody>
+                            </template>
+                        </table>
+                    </div>
+                    <!-- Available price plan ends here -->
 
 
-    </div>
-    </section>
+                </div>
+            </section>
 
-    </main>
+        </main>
 </body>
 <footer class="page-footer">
 

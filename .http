@@ -1,40 +1,47 @@
+
+# Getting the total phone gill for a given price plan
+
 POST http://localhost:3009/api/phonebill/
 content-type: application/json
 
 {
-    "price_plan": "sms 501",
-    "actions" : "call, sms, call,call,sms"
+    "price_plan": "sms 701",
+    "actions" : "call, sms, call,call,sms,call"
 }
 
 
+
+# Updating a given price plan post
 ###
 POST http://localhost:3009/api/price_plan/update
 content-type: application/json
 
 {
-    "plan_name": "2.65",
+    "plan_name": "sms 101",
     "sms_price":"14.34",
     "call_price":"11.2"
 }
 
 
+
+# creating a new price plan
 ###
 POST http://localhost:3009/api/price_plan/create
 content-type: application/json
 
 {
-    "name": "sms_kick_200",
+    "name": "fabchi",
     "call_cost" : 2.65,
     "sms_cost": 0.45
 }
 
-
+# deleting an existing price plan
 ###
 POST http://localhost:3009/api/price_plan/delete
 content-type: application/json
 
 {
-    "plan_name": "6"
+    "id": "fabchi"
 }
 
 
