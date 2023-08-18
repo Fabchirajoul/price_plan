@@ -45,7 +45,7 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="name">Enter Plan Name:</label>
-                                    <input type="text" id="name" name="name" x-model="plan_name">
+                                    <input type="text" id="name" name="name" x-model="plan_name" placeholder="Enter your plan name here">
                                 </div>
 
                                 <div class="input-field col s12">
@@ -61,9 +61,16 @@
                             </div>
 
                             <button x-on:click="createPlan()" class="waves-effect waves-light btn-small">Add
-                                plan</button>
+                                </button>
+
+                                <button x-on:click="updatePlan()" class="waves-effect waves-light btn-small">update</button>
+
+                                <button x-on:click="refresh()" class="waves-effect waves-light btn-small">reset</button>
 
                         </form>
+                        <div>
+                            <span x-text="addMessage"></span>
+                        </div>
 
                     </div>
                     <!-- adding a price plan ends here -->
@@ -91,7 +98,9 @@
                             </div>
 
                             <button x-on:click="addPricePlan" class="waves-effect waves-light btn-small">update
-                                plan</button>
+                                </button>
+
+                                <button x-on:click="refresh()" class="waves-effect waves-light btn-small">reset</button>
 
                         </form>
 
@@ -104,9 +113,13 @@
              
                 <div class="row">
                     <!-- Available price plan starts here -->
+                    
                    
                     <div class="col l12 m12 s12" style="text-align: center; background-color: aqua;">
                         <p x-text="titlePhoneBillsqlavailable" style="text-align: center;"></p>
+                        <div>
+                            <span x-text="deleteMesage"></span>
+                        </div>
                         
                         <table class="bordered" >
                             <thead style="text-align: center;">

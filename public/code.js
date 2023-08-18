@@ -4,7 +4,7 @@ document.addEventListener("alpine:init", () => {
       title: "MY PHONEBILL API WITH SQL USING MATERIALIZE FRAMEWORK",
 
       titlePhoneBillsql: "MY PHONE BILL API WITH SQL",
-      titlePhoneBillsqladd: "ADDING A NEW PRICE PLAN",
+      titlePhoneBillsqladd: "PHONE BILL PRICE PLAN CALCULATOR",
       titlePhoneBillsqlupdate: "UPDATING AN EXISITING PRICE PLAN",
       titlePhoneBillsqldelete: "DELETING AN EXISITING PRICE PLAN",
       titlePhoneBillsqlavailable:
@@ -14,6 +14,9 @@ document.addEventListener("alpine:init", () => {
       sms_price: 0,
       plan_name: "",
       response: [],
+      addMessage:"",
+      deleteMesage:"",
+      updateMessage:"",
       // allplans:[],
 
       // Phone bill starts Here
@@ -39,8 +42,10 @@ document.addEventListener("alpine:init", () => {
           })
           .then((result) => {
             console.log("result here " + result.data.response);
+            this.addMessage = this.plan_name +" plan name successfully added";
           });
-        console.log("ook");
+          setTimeout(() => (this.addMessage = "",this.plan_name= "", this.sms_price="", this.call_price=""), 3000);
+       
       },
 
       // creating a new price plans ends here
@@ -57,32 +62,24 @@ document.addEventListener("alpine:init", () => {
         })
         .then((result) =>{
           console.log("result here" +result.data.response);
+          this.deleteMesage = this.plan_name +" plan name successfully deleted";
         });
+        setTimeout(() => (this.deleteMesage = ""), 3000);
       },
       // delete plan ends here
-
-      // total starts here 
-
-      planTotal (price_plan){
-
-
-        axios
-        .post("/api/phonebill/", {
-
-          price_plan: price_plan,
-        })
-        .then((result) =>{
-          console.log("result here" +result.data);
-        })
-      },
-
-
-
-      // total ends here 
 
       init() {
         this.getPlans();
         // this.createPlan();
+      },
+
+      refresh(){
+
+        this.plan_name = "";
+        this.sms_price = 0;
+        this.call_price = 0;
+
+
       },
 
       // get all price plan ends here

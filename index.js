@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getPlans, createPlan, deletePlan, planTotal } from "./db.js";
+import { getPlans, createPlan, deletePlan} from "./db.js";
 
 const app = express();
 
@@ -11,27 +11,9 @@ app.use(express.static("public"));
 // Makes req.body works (This is known as the middleware)
 app.use(express.json());
 
-// Creating a post route that will calculate the total starts here
-// Post routes are somehow different and as such they take as parameters req.body which is where our data comes from
-
-app.post("/api/phonebill/", async function (req, res) {
-  // console.log(req.body);
-
-  const price_plan = req.body.price_plan;
-  const total = await planTotal(price_plan);
-  res.json({
-    response: "Successfully sumed the total",
-    total
-  });
-});
-// Creating a post route that will calculate the total ends here
-
 // Section that lists all the available price plan starts here
 app.get("/api/price_plans", async function (req, res) {
   const price_plans = await getPlans();
-
-  console.log(price_plans);
-
   res.json({
     price_plans,
   });
@@ -41,8 +23,6 @@ app.get("/api/price_plans", async function (req, res) {
 // creating a new price plan starts Here
 
 app.post("/api/price_plan/create", async function (req, res) {
-  console.log("trying to hh");
-
   const name = String(req.body.plan_name);
   const sms_cost = Number(req.body.sms_price);
   const call_cost = Number(req.body.call_price);
@@ -58,8 +38,6 @@ app.post("/api/price_plan/create", async function (req, res) {
 // deleting a price plan starts here
 
 app.post("/api/price_plan/delete", async function (req, res) {
-  // console.log(req.body)
-  // console.log(req.body);
   const name = String(req.body.plan_name);
   await deletePlan(name);
 
