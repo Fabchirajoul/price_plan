@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getPlans, createPlan, deletePlan} from "./db.js";
+import { getPlans, createPlan, deletePlan, updatePlan} from "./db.js";
 
 const app = express();
 
@@ -54,15 +54,21 @@ app.post("/api/price_plan/delete", async function (req, res) {
 app.post("/api/price_plan/update", async function (req, res) {
   // console.log(req.body)
 
-  const { sms_price, call_price, plan_name } = req.body;
+  const name = String(req.body.plan_name);
+  const sms_cost = Number(req.body.sms_price);
+  const call_cost = Number(req.body.call_price);
 
-  await db.run(
-    `update price_plan set sms_price=?, call_price = ? where plan_name = ?`,
+  // const { sms_price, call_price, plan_name } = req.body;
 
-    sms_price,
-    call_price,
-    plan_name
-  );
+  // await db.run(
+  //   `update price_plan set sms_price=?, call_price = ? where plan_name = ?`,
+
+  //   sms_price,
+  //   call_price,
+  //   plan_name
+  // );
+
+  await updatePlan(name, sms_cost, call_cost);
 
   res.json({
     status: "Success",

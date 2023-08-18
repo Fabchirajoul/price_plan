@@ -14,9 +14,10 @@ document.addEventListener("alpine:init", () => {
       sms_price: 0,
       plan_name: "",
       response: [],
-      addMessage:"",
-      deleteMesage:"",
-      updateMessage:"",
+      addMessage: "",
+      deleteMesage: "",
+      updateMessage: "",
+      open: false,
       // allplans:[],
 
       // Phone bill starts Here
@@ -34,6 +35,10 @@ document.addEventListener("alpine:init", () => {
       // creating a new price plan starts here
 
       createPlan() {
+        // if(this.plan_name==plan_name && this.sms_price == sms_price && this.call_price == call_price){
+        //   this.addMessage = "There exists a price pln with the exact information in the databse. Would you like to update ?"
+        // } else{
+
         axios
           .post("/api/price_plan/create", {
             plan_name: this.plan_name,
@@ -42,28 +47,52 @@ document.addEventListener("alpine:init", () => {
           })
           .then((result) => {
             console.log("result here " + result.data.response);
-            this.addMessage = this.plan_name +" plan name successfully added";
+            this.addMessage = this.plan_name + " plan name successfully added";
           });
-          setTimeout(() => (this.addMessage = "",this.plan_name= "", this.sms_price="", this.call_price=""), 3000);
-       
+        setTimeout(
+          () => (
+            (this.addMessage = ""),
+            (this.plan_name = ""),
+            (this.sms_price = ""),
+            (this.call_price = "")
+          ),
+          3000
+        );
+        // }
       },
 
       // creating a new price plans ends here
 
-      // delete plan starts here
-
-      deletePlan(plan_name){
-
+      // updating a price plan starts here 
+      updatePlan(){
 
         axios
-        .post("/api/price_plan/delete", {
-
-          plan_name: plan_name,
+        .post("/api/price_plan/update", {
+          plan_name: this.plan_name,
+          sms_price: this.sms_price,
+          call_price: this.call_price,
         })
-        .then((result) =>{
-          console.log("result here" +result.data.response);
-          this.deleteMesage = this.plan_name +" plan name successfully deleted";
+        .then((result) => {
+          console.log("result here " + result.data.response);
+          this.updateMessage = this.plan_name + " plan name successfully updated";
         });
+      },
+
+
+      // updating a price plan ends here 
+
+      // delete plan starts here
+
+      deletePlan(plan_name) {
+        axios
+          .post("/api/price_plan/delete", {
+            plan_name: plan_name,
+          })
+          .then((result) => {
+            console.log("result here" + result.data.response);
+            this.deleteMesage =
+              this.plan_name + " plan name successfully deleted";
+          });
         setTimeout(() => (this.deleteMesage = ""), 3000);
       },
       // delete plan ends here
@@ -73,29 +102,11 @@ document.addEventListener("alpine:init", () => {
         // this.createPlan();
       },
 
-      refresh(){
-
+      refresh() {
         this.plan_name = "";
-        this.sms_price = 0;
-        this.call_price = 0;
-
-
+        this.sms_price = '';
+        this.call_price = '';
       },
-
-      // get all price plan ends here
-      // Creates a new price plan starts here
-
-      // Creating to add a new price plan ends here
-
-      // update price plan starts here
-
-      // update price plan ends here
-
-
-
-      // Getting total for a price plan starts here
-
-      // getting total for a price plan ends here
     };
   });
 });

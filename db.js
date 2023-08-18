@@ -35,3 +35,12 @@ export async function deletePlan(name) {
   await db.run(`delete from price_plan where plan_name = ?`, [name]);
 }
 
+export async function updatePlan(name, sms_cost, call_cost){
+
+  await db.run(
+    `update price_plan set sms_price=?, call_price = ? where plan_name = ?`,
+
+      [name,sms_cost,call_cost]
+  );
+}
+
