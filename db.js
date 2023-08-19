@@ -36,42 +36,9 @@ export async function deletePlan(name) {
 }
 
 export async function updatePlan(name, sms_cost, call_cost){
-
-  await db.run(
-    `update price_plan set sms_price=?, call_price = ? where plan_name = ?`,
-
-      [name,sms_cost,call_cost]
-  );
+  const sql = 'update price_plan set call_price = ?, sms_price = ? where plan_name = ?';
+  await db.run(sql, [call_cost, sms_cost, name]);
 }
 
-// planTotal starts here 
 
-
-export async function planTotal(price_plan, activity){
-
-  // const price_plan_Name = req.body.price_plan
-  const activities = activity.split(",");
-  let total = 0;
-
-  activities.forEach((action) => {
-    if (action.trim() == "sms") {
-      total += price_plan.sms_price;
-    } else if (action.trim() == "call") {
-      total += price_plan.call_price;
-    }
-  });
-
-  res.json({
-    total,
-  })
-
-}
-// planTotal ends heew 
-
-export async function actionPlan(price_plan, action){
-
-  await db.run( `SELECT id, plan_name, sms_price, call_price FROM price_plan WHERE plan_name = ?`,
-  [price_plan]
-  );
-}
 
