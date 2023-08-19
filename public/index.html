@@ -41,7 +41,7 @@
                     <!-- Adding a price plan starts here -->
                     <div class="col l6 m12 col s12" style="background-color: aquamarine;">
                         <p x-text="titlePhoneBillsqladd"></p>
-                        <form class="col s12" x-on:submit.prevent="plan_name, call_price, sms_price">
+                        <form class="col s12" x-on:submit.prevent="plan_name, call_price, sms_price,nameUpdate,sms_costUpdate,call_costUpdate">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="name">Enter Plan Name:</label>
@@ -76,35 +76,34 @@
                     <!-- adding a price plan ends here -->
                     <!-- updating a an exisiting price plan starts here -->
 
-                    <!-- <div class="col l6 m12 s12" style="background-color: blanchedalmond;">
+                    <div class="col l6 m12 s12" style="background-color: blanchedalmond;">
                         <p x-text="titlePhoneBillsqlupdate"></p>
                         <form class="col s12">
                             <div class="row">
-                                <div class="input-field col s12">
-                                    <label for="name">Enter Plan Name:</label>
-                                    <input x-model="name" type="text" id="name" name="name">
-                                </div>
+                               
+                                   <template x-for="i in response">
+                                        <select class="browser-default" name="languages" id="languages">
+                                            <option value="" disabled selected>Choose a price plan</option>
+                                            <option x-text="i.plan_name">English</option>
+                                        </select>
+                                   </template>
 
+                                   
+                                </template>
                                 <div class="input-field col s12">
-
-                                    <label for="callprice">Enter Call Price:</label>
-                                    <input x-model="call_price" type="number" id="callprice" name="call price">
-                                </div>
-
-                                <div class="input-field col s12">
-                                    <label for="smsprice">Enter Sms Price:</label>
-                                    <input x-model="sms_price" type="number" id="smsprice" name="sms price" >
+                                    <label for="smsprice">Action:</label>
+                                    <input x-model="" type="text" id="smsprice" name="sms price" placeholder="Enter comma seperated string">
                                 </div>
                             </div>
 
-                            <button x-on:click="addPricePlan" class="waves-effect waves-light btn-small">update
+                            <button x-on:click="" class="waves-effect waves-light btn-small">total
                                 </button>
 
                                 <button x-on:click="refresh()" class="waves-effect waves-light btn-small">reset</button>
 
                         </form>
 
-                    </div> -->
+                    </div>
                     <!-- updating an exisiting price plan ends here -->
                     
                 </div>

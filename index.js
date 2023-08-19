@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getPlans, createPlan, deletePlan, updatePlan} from "./db.js";
+import { getPlans, createPlan, deletePlan, updatePlan, planTotal} from "./db.js";
 
 const app = express();
 
@@ -58,23 +58,41 @@ app.post("/api/price_plan/update", async function (req, res) {
   const sms_cost = Number(req.body.sms_price);
   const call_cost = Number(req.body.call_price);
 
-  // const { sms_price, call_price, plan_name } = req.body;
+  if(!name && !sms_cost && !call_cost){
 
-  // await db.run(
-  //   `update price_plan set sms_price=?, call_price = ? where plan_name = ?`,
 
-  //   sms_price,
-  //   call_price,
-  //   plan_name
-  // );
+    res.json({
+      error: "No parameters found for"
+    })
+  }
 
   await updatePlan(name, sms_cost, call_cost);
 
   res.json({
     status: "Success",
-  });
+  });  
 });
 // updating a price plan ends here
+
+// action plan for total starts here 
+
+app.post("/api/phonebill/", async function(req, res){
+
+  const price_plan_Name = String(req.body.price_plan);
+  const activity = String(req.body.actions);
+
+  if(!price_plan_Name){
+    res.json({
+      error: `Invalid price plan name ${price_plan_Name}`
+    })
+
+  }
+
+  res.json({
+    total: await planTotal(price_plan_Name, activity)
+  });
+});
+// action plan for total ends here 
 
 // Adding our port listener which is by defualt
 let PORT = process.env.PORT || 3008;

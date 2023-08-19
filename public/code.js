@@ -18,6 +18,9 @@ document.addEventListener("alpine:init", () => {
       deleteMesage: "",
       updateMessage: "",
       open: false,
+      nameUpdate:"",
+      sms_costUpdate:0,
+      call_costUpdate:0,
       // allplans:[],
 
       // Phone bill starts Here
@@ -65,21 +68,35 @@ document.addEventListener("alpine:init", () => {
 
       // updating a price plan starts here 
       updatePlan(){
-
+       
         axios
         .post("/api/price_plan/update", {
-          plan_name: this.plan_name,
-          sms_price: this.sms_price,
-          call_price: this.call_price,
+          plan_name:this.nameUpate,
+          call_price:this.call_cost,
+          sms_price: this.sms_cost   
         })
         .then((result) => {
-          console.log("result here " + result.data.response);
+          this.response = result.data
           this.updateMessage = this.plan_name + " plan name successfully updated";
         });
       },
 
 
       // updating a price plan ends here 
+
+      // planTotal starts here 
+
+
+      planTotal(){
+        axios.post("/api/phonebill/",{
+          price_plan_Name : this.price_plan,
+          activity : this.actions,
+        })
+        .then((result) => {
+          console.log("result here " + result.data.total);
+        });
+      },
+      // planTotal ends here 
 
       // delete plan starts here
 
