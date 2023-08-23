@@ -48,16 +48,9 @@ document.addEventListener("alpine:init", () => {
           .then((result) => {
             console.log("result here " + result.data.response);
             this.addMessage = this.plan_name + " plan name successfully added";
+            this.getPlans()
           });
-        setTimeout(
-          () => (
-            (this.addMessage = ""),
-            (this.plan_name = ""),
-            (this.sms_price = ""),
-            (this.call_price = "")
-          ),
-          3000
-        );
+          setTimeout(() => (this.plan_name = "",this.sms_price="",this.call_price="",this.addMessage=""), 3000);
         // }
       },
 
@@ -65,10 +58,6 @@ document.addEventListener("alpine:init", () => {
 
       // updating a price plan starts here
       updatePlan() {
-        console.log(this.plan_name);
-        console.log(this.call_price);
-        console.log(this.sms_price);
-
         axios
           .post("/api/price_plan/update", {
             plan_name: this.plan_name,
@@ -77,9 +66,10 @@ document.addEventListener("alpine:init", () => {
           })
           .then((result) => {
             this.response = result.data;
-            this.updateMessage =
-              this.plan_name + " plan name successfully updated";
+            this.updateMessage = this.plan_name + " plan name successfully updated";
+            this.getPlans()
           });
+          setTimeout(() => (this.plan_name = "",this.sms_price="",this.call_price="",this.updateMessage=""), 3000);
       },
 
       // updating a price plan ends here
@@ -94,9 +84,12 @@ document.addEventListener("alpine:init", () => {
             plan_name: plan_name,
           })
           .then((result) => {
-            console.log("result here" + result.data.response);
-            this.deleteMesage =
-              this.plan_name + " plan name successfully deleted";
+            this.response = result.data.response
+
+            // console.log("result here" + result.data.response);
+
+            this.deleteMesage = this.plan_name + " plan name successfully deleted";
+            this.getPlans()
           });
         setTimeout(() => (this.deleteMesage = ""), 3000);
       },

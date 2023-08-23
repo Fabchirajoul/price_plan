@@ -51,15 +51,21 @@
                                 <div class="input-field col s12">
 
                                     <label for="name">Enter Call Price:</label>
-                                    <input id="name" type="number" length="101" x-model="call_price" placeholder="Enter your call price here">
+                                    <input  type="number"  x-model="call_price" placeholder="Enter your call price here">
                                 </div>
 
                                 <div class="input-field col s12">
                                     <label for="name">Enter Sms Price:</label>
-                                    <input id="name" type="number" length="101" x-model="sms_price" placeholder="Enter your sms price here">
+                                    <input type="number" x-model="sms_price" placeholder="Enter your sms price here">
                                 </div>
                             </div>
-
+                            <div>
+                                <span x-text="addMessage"></span>
+                            </div>
+    
+                            <div>
+                                <span x-text="updateMessage"></span>
+                            </div>
                             <button x-on:click="createPlan()" class="waves-effect waves-light btn-small">Add
                                 </button>
 
@@ -68,10 +74,6 @@
                                 <button x-on:click="refresh()" class="waves-effect waves-light btn-small">reset</button>
 
                         </form>
-                        <div>
-                            <span x-text="addMessage"></span>
-                        </div>
-
                     </div>
                     <!-- adding a price plan ends here -->
                     <!-- updating a an exisiting price plan starts here -->
@@ -141,7 +143,7 @@
                                             <td colspan="3"x-text="i.plan_name"></td>
                                             <td colspan="3"x-text="i.call_price"></td>
                                             <td colspan="3" x-text="i.sms_price"></td>
-                                            <td colspan="3" x-text="i.total">johnsmim</td>
+                                            <td colspan="3" x-text="i.total.toFixed(2)">johnsmim</td>
                                             <td colspan="3"> <button x-on:click="deletePlan(i.plan_name)"
                                                     class="waves-effect waves-light btn-small">delete
                                                     plan</button></td>
