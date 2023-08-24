@@ -1,23 +1,23 @@
 
 # Getting the total phone gill for a given price plan
 
-POST http://localhost:3009/api/phonebill/
+POST http://localhost:3008/api/phonebill/
 content-type: application/json
 
 {
-    "price_plan": "sms 701",
-    "actions" : "call, sms, call,call,sms,call"
+    "price_plan": "sms_101",
+    "actions" : "call, sms, call,sms,sms"
 }
 
 
 
 # Updating a given price plan post
 ###
-POST http://localhost:3009/api/price_plan/update
+POST http://localhost:3008/api/price_plan/update
 content-type: application/json
 
 {
-    "plan_name": "sms 101",
+    "plan_name": "fabchi",
     "sms_price":"14.34",
     "call_price":"11.2"
 }
@@ -26,18 +26,18 @@ content-type: application/json
 
 # creating a new price plan
 ###
-POST http://localhost:3009/api/price_plan/create
+POST http://localhost:3008/api/price_plan/create
 content-type: application/json
 
 {
-    "name": "fabchi",
-    "call_cost" : 2.65,
-    "sms_cost": 0.45
+    "plan_name": "fabchi",
+    "call_price" : 2.65,
+    "sms_price": 0.45
 }
 
 # deleting an existing price plan
 ###
-POST http://localhost:3009/api/price_plan/delete
+POST http://localhost:3008/api/price_plan/delete
 content-type: application/json
 
 {
@@ -46,4 +46,4 @@ content-type: application/json
 
 
 ###
-GET http://localhost:3009/api/price_plans
+GET http://localhost:3008/api/price_plans

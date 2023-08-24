@@ -41,7 +41,7 @@
                     <!-- Adding a price plan starts here -->
                     <div class="col l6 m12 col s12" style="background-color: aquamarine;">
                         <p x-text="titlePhoneBillsqladd"></p>
-                        <form class="col s12" x-on:submit.prevent="plan_name, call_price, sms_price,nameUpdate,sms_costUpdate,call_costUpdate">
+                        <form class="col s12" x-on:submit.prevent="plan_name, call_price, sms_price">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="name">Enter Plan Name:</label>
@@ -76,40 +76,62 @@
                         </form>
                     </div>
                     <!-- adding a price plan ends here -->
-                    <!-- updating a an exisiting price plan starts here -->
+                    <!-- Total price plan price plan starts here -->
 
-                    <!-- <div class="col l6 m12 s12" style="background-color: blanchedalmond;">
+                    <div class="col l6 m12 s12" style="background-color: blanchedalmond;">
                         <p x-text="titlePhoneBillsqlupdate"></p>
-                        <form class="col s12">
-                            <div class="row">
-                               
-                                   <template x-for="i in response">
-                                        <select class="browser-default" name="languages" id="languages">
-                                            <option value="" disabled selected>Choose a price plan</option>
-                                            <option x-text="i.plan_name">English</option>
-                                        </select>
-                                   </template>
+                        <form x-on:submit.prevent="selectedName, actions">
+                            
+                          
+                            <label for="name">Plan Name:</label><br>
+                            <input x-model="selectedName" type="text" id="selectedName" name="selectedName"><br>
+    
+                            <label for="actions">Actions:</label><br>
+                            <input x-model="actions" type="text" id="actions"  name="actions"><br>
+                          
+                            <button x-on:click="phoneBill">Total</button>
+                        </form><br>
+    
+                        <div>
+                            <h3 class="text-primary">R<label x-text="total"></label></h3>
+                        </div>
 
-                                   
-                                </template>
-                                <div class="input-field col s12">
-                                    <label for="smsprice">Action:</label>
-                                    <input x-model="" type="text" id="smsprice" name="sms price" placeholder="Enter comma seperated string">
-                                </div>
-                            </div>
-
-                            <button x-on:click="" class="waves-effect waves-light btn-small">total
-                                </button>
-
-                                <button x-on:click="refresh()" class="waves-effect waves-light btn-small">reset</button>
-
-                        </form>
-
-                    </div> -->
+                    </div>
                     <!-- updating an exisiting price plan ends here -->
                     
                 </div>
             </section><br>
+
+            <!-- will take it out  -->
+
+            <section>
+                <form class="col s12">
+                    <div class="row">
+                       
+                          
+                                <select class="browser-default" name="languages" id="languages">
+                                    <option value="" disabled selected>Choose a price plan</option>
+                                    <template x-for="i in response">
+                                    <option x-model="i.selectedName"><span x-text="i.plan_name" ></span></option>
+                                </template>
+                                </select>
+                        <div class="input-field col s12">
+                            <label for="smsprice">Action:</label>
+                            <input x-model="actions" type="text" id="smsprice" name="sms price" placeholder="Enter comma seperated string">
+                        </div>
+                    </div>
+
+                    <button x-on:click="planTotal()" class="waves-effect waves-light btn-small">total
+                        </button>
+
+                        <button x-on:click="refresh()" class="waves-effect waves-light btn-small">reset</button>
+
+                </form>
+
+                <div>
+                    <span x-text="total"></span>
+                </div>
+            </section>
             <section>
              
                 <div class="row">
@@ -143,7 +165,7 @@
                                             <td colspan="3"x-text="i.plan_name"></td>
                                             <td colspan="3"x-text="i.call_price"></td>
                                             <td colspan="3" x-text="i.sms_price"></td>
-                                            <td colspan="3" x-text="i.total.toFixed(2)">johnsmim</td>
+                                            <td colspan="3" x-text="i.total">johnsmim</td>
                                             <td colspan="3"> <button x-on:click="deletePlan(i.plan_name)"
                                                     class="waves-effect waves-light btn-small">delete
                                                     plan</button></td>

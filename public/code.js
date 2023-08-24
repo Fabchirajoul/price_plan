@@ -5,7 +5,7 @@ document.addEventListener("alpine:init", () => {
 
       titlePhoneBillsql: "MY PHONE BILL API WITH SQL",
       titlePhoneBillsqladd: "PHONE BILL PRICE PLAN CALCULATOR",
-      titlePhoneBillsqlupdate: "UPDATING AN EXISITING PRICE PLAN",
+      titlePhoneBillsqlupdate: "COMMA SEPERATED TOTAL PRICE PLAN",
       titlePhoneBillsqldelete: "DELETING AN EXISITING PRICE PLAN",
       titlePhoneBillsqlavailable:
         "TOTAL AVAILABLE PRICE PLANS IN THE DATABABSE",
@@ -18,7 +18,11 @@ document.addEventListener("alpine:init", () => {
       deleteMesage: "",
       updateMessage: "",
       open: false,
-      // allplans:[],
+      selectedDb: "",
+      total: "",
+      actions: "",
+      selectedName: "",
+      
 
       // Phone bill starts Here
 
@@ -55,6 +59,21 @@ document.addEventListener("alpine:init", () => {
       },
 
       // creating a new price plans ends here
+
+      // total phone bill starts here 
+
+      phoneBill() {
+        axios
+            .post('/api/price_plan/phonebill', {
+                plan_name: this.selectedName,
+                actions: this.actions
+            })
+            .then((result) => {
+                this.total = result.data.total;
+            })
+    },
+
+      // total phone bill ends here 
 
       // updating a price plan starts here
       updatePlan() {
@@ -99,6 +118,21 @@ document.addEventListener("alpine:init", () => {
         this.getPlans();
         // this.createPlan();
       },
+
+      // total starts here 
+      planTotal() {
+        axios
+            .post('/api/price_plan/phonebill', {
+                price_plan: this.selectedName,
+                actions: this.actions
+            })
+            .then((result) => {
+                this.total = result.data.total;
+            })
+    },
+
+    
+      // total ends here 
 
       refresh() {
         this.plan_name = "";

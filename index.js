@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getPlans, createPlan, deletePlan, updatePlan} from "./db.js";
+import { getPlans, createPlan, deletePlan, updatePlan, totalPhoneBill} from "./db.js";
 
 const app = express();
 
@@ -19,6 +19,30 @@ app.get("/api/price_plans", async function (req, res) {
   });
 });
 // Section that lists all the available price plan ends here
+
+// total price price for comma seperated functon starts here 
+
+app.post('/api/price_plan/phonebill', async function (req, res) {
+  const pricePlanName = req.body.plan_name;
+  const actionsString = req.body.actions;
+
+  if (!pricePlanName && !actionsString) {
+      res.json({
+          error: "one of the parameters not found!"
+      })
+  }
+
+  res.json(
+      {
+          total: await totalPhoneBill(pricePlanName, actionsString)
+      }
+  );
+
+});
+
+
+
+// total price price for comma seperated functon ends here 
 
 // creating a new price plan starts Here
 
