@@ -87,14 +87,14 @@
                             <input x-model="selectedName" type="text" id="selectedName" name="selectedName" placeholder="Enter an existing plan name"><br>
     
                             <label for="actions">Actions:</label><br>
-                            <input x-model="actions" type="text" id="actions"  name="actions" placeholder="Enter comma seperated string i.e call,sms,call,sms"><br>
+                            <input x-model="actions" type="text" id="actions"  name="actions" placeholder="Enter comma seperated string i.e call,sms,call,sms"><br><br><br><br><br>
                             
                             <button x-on:click="phoneBill" class="waves-effect waves-light btn-small">Total</button>
                             <button x-on:click="totalefresh()" class="waves-effect waves-light btn-small">reset</button>
                         </form>
     
                         <div>
-                           <span x-text="total"></span>
+                           <label>R<span x-text="total"></span></label>
                         </div>
                     </div>
                     <!-- updating an exisiting price plan ends here -->
