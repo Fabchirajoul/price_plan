@@ -8,7 +8,7 @@ document.addEventListener("alpine:init", () => {
       titlePhoneBillsqlupdate: "COMMA SEPERATED TOTAL PRICE PLAN",
       titlePhoneBillsqldelete: "DELETING AN EXISITING PRICE PLAN",
       titlePhoneBillsqlavailable:
-        "TOTAL AVAILABLE PRICE PLANS IN THE DATABABSE",
+        "AVAILABLE PRICE PLANS IN THE DATABABSE",
       totalplanprice: false,
       call_price: 0,
       sms_price: 0,
