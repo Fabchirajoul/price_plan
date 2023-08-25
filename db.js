@@ -30,8 +30,8 @@ export async function totalPhoneBill(plan_name, actions) {
 
   let l = actions.split(",");
   var cost = 0;
-  const callCost = result[0].call_price;
-  const smsCost = result[0].sms_price;
+  const callCost = Number(result[0].call_price);
+  const smsCost = Number(result[0].sms_price);
   
   for (var name of l) {
     if (name.includes("call")) {

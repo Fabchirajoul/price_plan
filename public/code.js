@@ -71,6 +71,7 @@ document.addEventListener("alpine:init", () => {
             .then((result) => {
                 this.total = result.data.total;
             })
+            setTimeout(() => (this.selectedName = "",this.actions="",this.total=""), 3000);
     },
 
       // total phone bill ends here 
@@ -101,7 +102,7 @@ document.addEventListener("alpine:init", () => {
         axios
           .post("/api/price_plan/delete", {
             plan_name: plan_name,
-          })
+          }) 
           .then((result) => {
             this.response = result.data.response
 
@@ -138,6 +139,11 @@ document.addEventListener("alpine:init", () => {
         this.plan_name = "";
         this.sms_price = "";
         this.call_price = "";
+      },
+
+      totalefresh() {
+        this.selectedName = "";
+        this.actions = "";
       },
     };
   });

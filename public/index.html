@@ -24,14 +24,14 @@
 
 </head>
 
-<body class="container">
+<body class="container" style="background-color: blanchedalmond;">
 
     <div class="card" x-data="BOOTCAMPEXPRESSAPIWITHSQL" x-cloak>
         <main>
             <section>
                 <div class="row">
                     <div class="col l12 m12 s12" style="text-align: center; background-color: aqua;">
-                        <p x-text="title"></p>
+                        <marquee behavior="alternate" direction="right"><p x-text="title"></p></marquee>
                     </div>
                 </div>
             </section>
@@ -60,11 +60,11 @@
                                 </div>
                             </div>
                             <div>
-                                <span x-text="addMessage"></span>
+                                <span x-text="addMessage" style="color: blue;"></span>
                             </div>
     
                             <div>
-                                <span x-text="updateMessage"></span>
+                                <span x-text="updateMessage" style="color: blueviolet;"></span>
                             </div>
                             <button x-on:click="createPlan()" class="waves-effect waves-light btn-small">Add
                                 </button>
@@ -82,56 +82,27 @@
                         <p x-text="titlePhoneBillsqlupdate"></p>
                         <form x-on:submit.prevent="selectedName, actions">
                             
-                          
+                            
                             <label for="name">Plan Name:</label><br>
-                            <input x-model="selectedName" type="text" id="selectedName" name="selectedName"><br>
+                            <input x-model="selectedName" type="text" id="selectedName" name="selectedName" placeholder="Enter an existing plan name"><br>
     
                             <label for="actions">Actions:</label><br>
-                            <input x-model="actions" type="text" id="actions"  name="actions"><br>
-                          
-                            <button x-on:click="phoneBill">Total</button>
-                        </form><br>
+                            <input x-model="actions" type="text" id="actions"  name="actions" placeholder="Enter comma seperated string i.e call,sms,call,sms"><br>
+                            
+                            <button x-on:click="phoneBill" class="waves-effect waves-light btn-small">Total</button>
+                            <button x-on:click="totalefresh()" class="waves-effect waves-light btn-small">reset</button>
+                        </form>
     
                         <div>
-                            <h3 class="text-primary">R<label x-text="total"></label></h3>
+                           <span x-text="total"></span>
                         </div>
-
                     </div>
                     <!-- updating an exisiting price plan ends here -->
                     
                 </div>
-            </section><br>
+            </section>
 
-            <!-- will take it out  -->
-
-            <!-- <section>
-                <form class="col s12">
-                    <div class="row">
-                       
-                          
-                                <select class="browser-default" name="languages" id="languages">
-                                    <option value="" disabled selected>Choose a price plan</option>
-                                    <template x-for="i in response">
-                                    <option x-model="i.selectedName"><span x-text="i.plan_name" ></span></option>
-                                </template>
-                                </select>
-                        <div class="input-field col s12">
-                            <label for="smsprice">Action:</label>
-                            <input x-model="actions" type="text" id="smsprice" name="sms price" placeholder="Enter comma seperated string">
-                        </div>
-                    </div>
-
-                    <button x-on:click="planTotal()" class="waves-effect waves-light btn-small">total
-                        </button>
-
-                        <button x-on:click="refresh()" class="waves-effect waves-light btn-small">reset</button>
-
-                </form>
-
-                <div>
-                    <span x-text="total"></span>
-                </div>
-            </section> -->
+            
             <section>
              
                 <div class="row">
@@ -142,7 +113,7 @@
                         <p x-text="titlePhoneBillsqlavailable" style="text-align: center;"></p>
                         <button x-on:click="open=!open" class="waves-effect waves-light btn">Show/Hide plans</button>
                         <div>
-                            <span x-text="deleteMesage"></span>
+                            <span x-text="deleteMesage" style="color: orange;"></span>
                         </div>
                         
                         
